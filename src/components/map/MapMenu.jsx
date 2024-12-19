@@ -8,7 +8,7 @@ function MapMenu({ setStyle, style, setTheme, theme }) {
   const [showOptions, setShowOptions] = useState(false);
 
   return (
-    <div className="fixed top-0 right-0 m-8">
+    <div className="fixed top-0 right-0 m-4 md:m-8">
       {/* Black Square (Top Right Control) */}
       <div className="flex flex-col-reverse flex-col md:flex-row gap-3">
         <LocateMe theme={theme}/>

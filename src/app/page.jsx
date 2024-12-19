@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       {/* Logo */}
-      <Link className="fixed m-8 z-20" href="/">
+      <Link className="fixed m-4 md:m-8 z-20" href="/">
         <Logo />
       </Link>
 
