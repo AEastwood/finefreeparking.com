@@ -1,6 +1,6 @@
 function Logo() {
     return (
-        <div>FineFreeParking</div>
+        <div>[LOGO]</div>
     )
 }
 

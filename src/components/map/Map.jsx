@@ -1,53 +1,40 @@
 'use client';
 
+import defaults from '@/data/maps/defaults';
 import themes from '@/data/maps/themes';
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import MapMenu from './MapMenu';
 
 export default function Page({ children }) {
-    const [mapState, setMapState] = useState({
-        center: {
-            lat: 54.242118,
-            lng: -4.00000
-        },
-        zoom: 6,
-    });
+    const [center, setCenter] = useState(defaults.center);
+    const [theme, setTheme] = useState(defaults.theme);
+    const [zoom, setZoom] = useState(defaults.zoom);
 
-    const [theme, setTheme] = useState('light');
-    const mapRef = useRef(null);
-
-    // Load persisted theme
+    {/* On load */ }
     useEffect(() => {
-        const savedTheme = localStorage.getItem('mapTheme') || 'light';
+        const savedTheme = localStorage.getItem('theme') || defaults.theme;
         setTheme(savedTheme);
     }, []);
 
-    // Update theme in localStorage
+    {/* Handle theme change */ }
     const handleThemeChange = (t) => {
-        
         setTheme(t);
-        localStorage.setItem('mapTheme', t);
+        localStorage.setItem('theme', t);
     };
 
-    // Update mapState when the center changes
-    const handleCenterChange = () => {
-        if (mapRef.current) {
-            const map = mapRef.current.getMap();
-            const center = map.getCenter();
-            setMapState((prevState) => ({
-                ...prevState,
-                center: { lat: center.lat(), lng: center.lng() },
-            }));
-        }
+    {/* Handle zoom change */ }
+    const handleZoomChange = (zoom) => {
+        setZoom(zoom)
+
+        if (zoom < 12) return;
     };
 
     return (
         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
             <Map
-                ref={mapRef} // Attach the ref to the Map
-                defaultCenter={mapState.center}
-                defaultZoom={mapState.zoom}
+                defaultCenter={center}
+                defaultZoom={zoom}
                 gestureHandling="greedy"
                 key={theme}
                 reuseMaps={true}
@@ -58,9 +45,16 @@ export default function Page({ children }) {
                     streetViewControl: false,
                     styles: themes[theme],
                 }}
-                onIdle={handleCenterChange} // Update center when map becomes idle
+                onCenterChanged={(map) => setCenter({
+                    lat: map.map.getCenter().lat(),
+                    lng: map.map.getCenter().lng(),
+                })}
+                onZoomChanged={(map) => handleZoomChange(map.map.zoom)}
             >
-                <MapMenu setTheme={handleThemeChange} theme={theme} />
+                <MapMenu
+                    setTheme={handleThemeChange}
+                    theme={theme}
+                />
                 {children}
             </Map>
         </APIProvider>
