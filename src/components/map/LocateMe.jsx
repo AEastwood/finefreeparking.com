@@ -1,15 +1,16 @@
 'use client'
 
 
-export default function LocateMe({ theme }) {
+export default function LocateMe({ setCenter, theme }) {
 
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                    setCenter({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
                 },
                 (block) => {
                     console.log('failed');

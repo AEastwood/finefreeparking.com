@@ -61,6 +61,7 @@ export default function Page({ children }) {
                 onZoomChanged={(map) => handleZoomChange(map.map.zoom)}
             >
                 <MapMenu
+                    setCenter={setCenter}
                     setStyle={handleThemeChange}
                     style={theme}
                     setTheme={handleThemeChange}
