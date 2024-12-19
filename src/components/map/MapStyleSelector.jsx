@@ -8,7 +8,7 @@ export default function MapStyleSelector({ setTheme, theme }) {
             </div>
 
             <select
-                className={"w-auto form-control form-control-sm text-white pr-4 cursor-pointer " + (theme === 'light' ? "bg-zinc-800" : "bg-zinc-900")}
+                className={"w-auto form-control form-control-sm text-white pr-4 cursor-pointer " + (theme === 'light' ? "bg-zinc-800" : "bg-zinc-950")}
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}
             >
