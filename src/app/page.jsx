@@ -1,11 +1,9 @@
+'use client'
+
 import Logo from "@/components/Logo";
 import Map from "@/components/map/Map";
 import Link from "next/link";
-
-export const metadata = {
-  title: 'FineFreeParking - Free & Legal Parking Finder Near You',
-  description: 'Find free, charge-free parking spots nearby with FineFreeParking. Avoid charges, fines, and parking tickets effortlessly. Start parking smarter today!',
-};
+import { APIProvider } from '@vis.gl/react-google-maps';
 
 export default function Home() {
   return (
@@ -16,7 +14,9 @@ export default function Home() {
       </Link>
 
       {/* Map */}
-      <Map />
+      <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+        <Map />
+      </APIProvider>
     </>
   );
 }
