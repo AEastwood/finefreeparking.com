@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
   title: 'FineFreeParking - Free & Legal Parking Finder Near You',
@@ -10,6 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
