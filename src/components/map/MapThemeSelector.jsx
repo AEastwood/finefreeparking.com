@@ -1,21 +1,15 @@
 
-export default function MapStyleSelector({ setStyle, style }) {
-    const disabled = true;
-
-    if (disabled) {
-        return <></>;
-    }
-
+export default function MapThemeSelector({ setTheme, theme }) {
     return (
         <>
-            {style === 'light' ? (
+            {theme === 'light' ? (
                 <button
-                    className="bg-gray-100 hover:bg-gray-200 p-4 rounded shadow"
-                    onClick={() => setStyle('dark')}
+                    className="w-12 h-12 bg-gray-100 hover:bg-gray-200 p-4 rounded drop-shadow"
+                    onClick={() => setTheme('dark')}
                     title="Set Dark Mode"
                 >
                     <svg
-                        className="w-5 h-5"
+                        className="w-4 h-4 m-auto"
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
@@ -29,12 +23,12 @@ export default function MapStyleSelector({ setStyle, style }) {
                 </button>
             ) : (
                 <button
-                    className="bg-zinc-900 hover:bg-zinc-950 text-white p-4 rounded shadow"
-                    onClick={() => setStyle('light')}
+                    className="w-12 h-12 bg-zinc-950 hover:bg-zinc-900 text-white p-4 rounded drop-shadow"
+                    onClick={() => setTheme('light')}
                     title="Set Light Mode"
                 >
                     <svg
-                        className="w-5 h-5"
+                        className="w-4 h-4 m-auto"
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
@@ -47,5 +41,5 @@ export default function MapStyleSelector({ setStyle, style }) {
                 </button>
             )}
         </>
-    )
+    );
 }

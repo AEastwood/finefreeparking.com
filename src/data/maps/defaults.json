@@ -3,6 +3,7 @@
         "lat": 54.242118,
         "lng": -4.00000
     },
+    "style": "MAP_TYPE_SATELLITE",
     "theme": "light",
     "zoom": 6
 }

@@ -8,6 +8,7 @@ import MapMenu from './MapMenu';
 
 export default function Page({ children }) {
     const [center, setCenter] = useState(defaults.center);
+    const [style, setStyle] = useState(defaults.style);
     const [theme, setTheme] = useState(defaults.theme);
     const [zoom, setZoom] = useState(defaults.zoom);
 
@@ -16,6 +17,12 @@ export default function Page({ children }) {
         const savedTheme = localStorage.getItem('theme') || defaults.theme;
         setTheme(savedTheme);
     }, []);
+
+    {/* Handle theme change */ }
+    const handleStyleChange = (s) => {
+        setStyle(s);
+        localStorage.setItem('style', s);
+    };
 
     {/* Handle theme change */ }
     const handleThemeChange = (t) => {
@@ -36,14 +43,16 @@ export default function Page({ children }) {
                 defaultCenter={center}
                 defaultZoom={zoom}
                 gestureHandling="greedy"
-                key={theme}
+                key={theme + style}
                 reuseMaps={true}
                 style={{ width: '100vw', height: '100vh' }}
                 options={{
                     fullscreenControl: false,
                     mapTypeControl: false,
+                    // mapTypeId: { style },
                     streetViewControl: false,
                     styles: themes[theme],
+                    zoomControl: false,
                 }}
                 onCenterChanged={(map) => setCenter({
                     lat: map.map.getCenter().lat(),
@@ -52,6 +61,8 @@ export default function Page({ children }) {
                 onZoomChanged={(map) => handleZoomChange(map.map.zoom)}
             >
                 <MapMenu
+                    setStyle={handleThemeChange}
+                    style={theme}
                     setTheme={handleThemeChange}
                     theme={theme}
                 />
