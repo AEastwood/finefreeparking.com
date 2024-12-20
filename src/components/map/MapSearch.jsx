@@ -3,8 +3,9 @@ import React from 'react'
 export default function MapSearch({ theme }) {
     const disabled = true;
 
-    if(disabled) 
-        return <></>
+    if (disabled) {
+        return <></>;
+    }
 
     return (
         <button
