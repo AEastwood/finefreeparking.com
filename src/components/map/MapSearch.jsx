@@ -1,6 +1,11 @@
 import React from 'react'
 
 export default function MapSearch({ theme }) {
+    const disabled = true;
+
+    if(disabled) 
+        return <></>
+
     return (
         <button
             onClick={() => alert('Not Implemented')}
